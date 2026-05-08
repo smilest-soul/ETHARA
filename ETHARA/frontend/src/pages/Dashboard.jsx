@@ -202,7 +202,7 @@ const Dashboard = () => {
           </div>
           
           <div className="flex-1 overflow-y-auto p-2">
-            {activities.length > 0 ? (
+            {Array.isArray(activities) && activities.length > 0 ? (
               <ul className="relative ml-6 mt-4 border-l border-border/60 pb-4">
                 {activities.map((activity, index) => (
                   <li key={activity._id} className="mb-6 ml-6 last:mb-0">
