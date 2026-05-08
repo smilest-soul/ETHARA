@@ -23,7 +23,8 @@ const CreateProjectModal = ({ isOpen, onClose, onSuccess }) => {
     setLoading(true);
     try {
       const res = await api.get('/auth/users');
-      setUsers(res.data.filter(u => u.role === 'member'));
+      const usersData = Array.isArray(res.data) ? res.data : [];
+      setUsers(usersData.filter(u => u.role === 'member'));
     } catch (error) {
       toast.error('Failed to load users');
     } finally {

@@ -49,9 +49,9 @@ const Dashboard = () => {
           api.get('/activities')
         ]);
 
-        const projects = projectsRes.data;
-        const tasks = tasksRes.data;
-        setActivities(activitiesRes.data);
+        const projects = Array.isArray(projectsRes.data) ? projectsRes.data : [];
+        const tasks = Array.isArray(tasksRes.data) ? tasksRes.data : [];
+        setActivities(Array.isArray(activitiesRes.data) ? activitiesRes.data : []);
 
         const now = new Date();
         const overdue = tasks.filter(t => t.status !== 'completed' && t.dueDate && new Date(t.dueDate) < now);

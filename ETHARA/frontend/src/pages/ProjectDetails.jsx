@@ -98,7 +98,7 @@ const ProjectDetails = () => {
           api.get(`/tasks?projectId=${id}`),
         ]);
         setProject(projRes.data);
-        setTasks(tasksRes.data);
+        setTasks(Array.isArray(tasksRes.data) ? tasksRes.data : []);
       } catch (error) {
         if (error.response?.status === 403) {
           toast.error("Access Denied: You are not a member of this project.");
@@ -150,7 +150,7 @@ const ProjectDetails = () => {
   };
 
   const handleTaskCreated = () => {
-    api.get(`/tasks?projectId=${id}`).then(res => setTasks(res.data));
+    api.get(`/tasks?projectId=${id}`).then(res => setTasks(Array.isArray(res.data) ? res.data : []));
   };
 
   if (loading) return (

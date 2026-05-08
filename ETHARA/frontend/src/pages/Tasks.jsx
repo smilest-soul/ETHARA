@@ -14,7 +14,7 @@ const Tasks = () => {
     const fetchTasks = async () => {
       try {
         const res = await api.get('/tasks');
-        setTasks(res.data);
+        setTasks(Array.isArray(res.data) ? res.data : []);
       } catch (error) {
         toast.error('Failed to fetch tasks');
       } finally {

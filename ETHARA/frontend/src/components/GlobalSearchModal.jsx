@@ -57,13 +57,15 @@ const GlobalSearchModal = ({ isOpen, onClose }) => {
       ]);
 
       const lowerQuery = searchQuery.toLowerCase();
+      const projectsData = Array.isArray(projectsRes.data) ? projectsRes.data : [];
+      const tasksData = Array.isArray(tasksRes.data) ? tasksRes.data : [];
       
-      const filteredProjects = projectsRes.data.filter(p => 
+      const filteredProjects = projectsData.filter(p => 
         p.name.toLowerCase().includes(lowerQuery) || 
         (p.description && p.description.toLowerCase().includes(lowerQuery))
       );
 
-      const filteredTasks = tasksRes.data.filter(t => 
+      const filteredTasks = tasksData.filter(t => 
         t.title.toLowerCase().includes(lowerQuery) || 
         (t.description && t.description.toLowerCase().includes(lowerQuery))
       );
