@@ -112,6 +112,10 @@ const deleteProject = async (req, res, next) => {
     const project = await Project.findById(req.params.id);
 
     if (project) {
+      // Cascade delete: remove all tasks and activities for this project
+      const Task = require('../models/Task');
+      await Task.deleteMany({ project: project._id });
+      await Activity.deleteMany({ project: project._id });
       await Project.deleteOne({ _id: project._id });
       res.json({ message: 'Project removed' });
     } else {

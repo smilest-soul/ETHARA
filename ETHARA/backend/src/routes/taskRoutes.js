@@ -7,10 +7,10 @@ router.route('/')
   .get(protect, getTasks)
   .post(protect, admin, createTask);
 
+router.patch('/:id/status', protect, updateTaskStatus);
+
 router.route('/:id')
   .put(protect, admin, updateTask)
   .delete(protect, admin, deleteTask);
-
-router.put('/:id/status', protect, updateTaskStatus);
 
 module.exports = router;
